@@ -384,3 +384,4 @@ _ReSharper.*
 # Nuget
 [Pp]ackages
 
+/DapperExtensions.StrongName/packages.config
