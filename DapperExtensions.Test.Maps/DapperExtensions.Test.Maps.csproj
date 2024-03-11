@@ -1,16 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netcoreapp2.1;netcoreapp3.1;net461;net5.0</TargetFrameworks>
+		<TargetFrameworks>netcoreapp3.1;net472;net6.0</TargetFrameworks>
 		<IsPackable>false</IsPackable>
 	</PropertyGroup>
 
 	<PropertyGroup>
 		<LangVersion>8.0</LangVersion>
+		<UserSecretsId>7fe10629-9f53-47b6-afbd-379f6cf9b653</UserSecretsId>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.0.0" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
 		<PackageReference Include="MySql.Data" Version="8.0.24" />
 		<PackageReference Include="NUnit" Version="3.13.2" />
