@@ -5,12 +5,28 @@
 		<Version>1.7.0</Version>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<LangVersion>8.0</LangVersion>
+    <PrivateKey />
 	</PropertyGroup>
 
 	<PropertyGroup>
 		<RuntimeIdentifiers>win;osx;linux</RuntimeIdentifiers>
 	</PropertyGroup>
 
+  <PropertyGroup Label="Signing">
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>SD.Dapper.Public.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>True</DelaySign>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(PrivateKey)' != '' ">
+    <SignAssembly>True</SignAssembly>
+    <DelaySign>False</DelaySign>
+    <AssemblyOriginatorKeyFile>$(PrivateKey)</AssemblyOriginatorKeyFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+  </PropertyGroup>
+  
+  
+  
 	<!--<PropertyGroup Condition=" '$(TargetFramework)' == 'net472'">
 		<DefineConstants>NETFRAMEWORK</DefineConstants>
 	</PropertyGroup>-->
@@ -63,6 +79,7 @@
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/tmsmith/Dapper-Extensions.git</RepositoryUrl>
 		<PackageReleaseNotes>
+      * for to SD repository
 			1.7.0
 			* Removed DNXCore
 			* Migrate project to Visual Studio 2019
@@ -86,11 +103,12 @@
 		</PackageReleaseNotes>
 		<PackageTags>orm sql micro-orm Data Dapper</PackageTags>
 		<NeutralLanguage></NeutralLanguage>
-		<SignAssembly>true</SignAssembly>
-		<AssemblyOriginatorKeyFile>DapperExtensions.snk</AssemblyOriginatorKeyFile>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 	</PropertyGroup>
 
+
+  
+  
 	<ItemGroup>
 		<Compile Include="..\DapperExtensions\DapperAsyncExtensions.cs" Link="DapperAsyncExtensions.cs" />
 		<Compile Include="..\DapperExtensions\DapperAsyncImplementor.cs" Link="DapperAsyncImplementor.cs" />
