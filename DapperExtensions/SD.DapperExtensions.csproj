@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFrameworks>netcoreapp3.1;net472;net6.0;netstandard2.1;</TargetFrameworks>
 		<Version>1.7.0</Version>
-		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<LangVersion>8.0</LangVersion>
 	</PropertyGroup>
 	
@@ -88,7 +88,7 @@
 		<PackageReference Include="Newtonsoft.Json" version="13.0.2" />
 		<PackageReference Include="Dapper" Version="2.0.90" />
 		<PackageReference Include="System.Data.Common" Version="4.3.0" />
-    <PackageReference Include="SD.Slapper.AutoMapper" Version="2.0.5"/>
+    <PackageReference Include="SD.Slapper.AutoMapper" Version="2.0.5" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' != 'net472' and '$(TargetFramework)' != 'net472'">
