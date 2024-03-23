@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>netcoreapp3.1;net472;net6.0;netstandard2.1;</TargetFrameworks>
-		<Version>1.7.0</Version>
+		<Version>1.7.1</Version>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<LangVersion>8.0</LangVersion>
 	</PropertyGroup>
@@ -28,7 +28,9 @@
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/tmsmith/Dapper-Extensions.git</RepositoryUrl>
 		<PackageReleaseNotes>
-      * for to SD repository
+      * for SD repository
+      1.7.1
+      * fix Get-by-id merged
       1.7.0
       * Removed DNXCore
       * Migrate project to Visual Studio 2019
