@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>netcoreapp3.1;net472;net6.0;netstandard2.1;</TargetFrameworks>
-		<Version>1.7.1</Version>
+		<Version>1.7.2-patch1</Version>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<LangVersion>8.0</LangVersion>
     <PrivateKey />
@@ -81,6 +81,9 @@
 		<RepositoryUrl>https://github.com/tmsmith/Dapper-Extensions.git</RepositoryUrl>
 		<PackageReleaseNotes>
       * for SD repository
+      1.7.2
+      * update slapper.mapper refs
+      * fix issue with update with ignore keys
       1.7.1
       * fix Get-by-id merged
       * for to SD repository
