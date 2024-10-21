@@ -375,7 +375,7 @@ namespace DapperExtensions
             if (entity != null && !predicates.Any())
             {
                 //Get Primary Key when use Identity
-                var key = classMap.Properties.SingleOrDefault(p=>p.KeyType == KeyType.Identity);
+                var key = classMap.Properties.SingleOrDefault(p=>p.KeyType == KeyType.Identity || p.KeyType == KeyType.Assigned);
                 AddPredicates(predicateType, predicates, key.Name, entity);
             }
 
