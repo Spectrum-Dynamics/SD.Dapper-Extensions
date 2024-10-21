@@ -90,7 +90,7 @@
 		<PackageReference Include="Newtonsoft.Json" version="13.0.2" />
 		<PackageReference Include="Dapper" Version="2.0.90" />
 		<PackageReference Include="System.Data.Common" Version="4.3.0" />
-    <PackageReference Include="SD.Slapper.AutoMapper" Version="2.0.5" />
+    <PackageReference Include="SD.Slapper.AutoMapper" Version="2.0.5-patch1" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' != 'net472' and '$(TargetFramework)' != 'net472'">

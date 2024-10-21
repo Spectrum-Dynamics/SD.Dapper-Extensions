@@ -2,15 +2,18 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata schemaVersion="2">
     <id>DapperExtensions</id>
-    <version>1.7.0</version>
+    <version>1.7.2-patch1</version>
     <authors>Thad Smith, Page Brooks</authors>
     <owners>Thad Smith, Page Brooks</owners>
     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
-    <projectUrl>https://github.com/valfrid-ly/Dapper-Extensions</projectUrl>
+    <projectUrl>https://github.com/Spectrum-Dynamics/SD.Dapper-Extensions</projectUrl>
     <!--<iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>-->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A small library that complements Dapper by adding basic CRUD operations (Get, Insert, Update, Delete) for your POCOs. For more advanced querying scenarios, Dapper Extensions provides a predicate system.</description>
     <releaseNotes>
+    1.7.2
+    * update slapper.mapper refs
+    * fix issue with update with ignore keys
 	  1.7.0
 	  * Forked from orginal project of Thad Smith
 	  * Implemented Code Coverage to the Tests
@@ -31,8 +34,8 @@
     </releaseNotes>
     <tags>orm sql micro-orm Data Dapper</tags>
 	<dependencies>
-      <dependency id="Dapper" version="2.0.30" />
-      <dependency id="Slapper.AutoMapper" version="2.0.1" />
+      <dependency id="Dapper" version="[2.0.30)" />
+      <dependency id="SD.Slapper.AutoMapper" version="[2.0.5)" />
       <dependency id="Newtonsoft.Json" version="12.0.3" />
       <dependency id="Microsoft.CSharp" version="4.7.0" />
     </dependencies>
