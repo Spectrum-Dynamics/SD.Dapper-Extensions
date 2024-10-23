@@ -784,6 +784,7 @@ namespace DapperExtensions
 
         protected T InternalGet<T>(IDbConnection connection, dynamic id, IDbTransaction transaction, int? commandTimeout, IList<IProjection> colsToSelect, IList<IReferenceMap> includedProperties = null)
         {
+            if (id is null) throw new NullReferenceException($"{nameof(id)} could not be null");
             var result = (IEnumerable<T>)InternalGetListAutoMap<T>(connection, id, null, transaction, commandTimeout, true, colsToSelect, includedProperties);
             return result.SingleOrDefault();
         }
