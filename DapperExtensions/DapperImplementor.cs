@@ -719,7 +719,9 @@ namespace DapperExtensions
                 {
                     keyValue = InsertIdentity(connection, transaction, commandTimeout, classMap, sql, dynamicParameters);
                 }
-
+                //workaround for identity type differ than long\Bigint
+                if (keyColumn.MemberType != keyValue.GetType())
+                    keyValue = Convert.ChangeType(keyValue, keyColumn.MemberType);
                 keyValues.Add(keyColumn.Name, keyValue);
                 keyColumn.SetValue(entity, keyValue);
             }
