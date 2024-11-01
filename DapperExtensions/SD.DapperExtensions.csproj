@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>netcoreapp3.1;net472;net6.0;netstandard2.1;</TargetFrameworks>
-		<Version>1.7.2-patch2</Version>
+		<Version>1.7.2-patch3</Version>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<LangVersion>8.0</LangVersion>
 	</PropertyGroup>
