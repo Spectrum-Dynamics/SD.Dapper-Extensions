@@ -163,6 +163,8 @@ namespace DapperExtensions.Sql
                 throw new ArgumentNullException(nameof(parameters), $"{nameof(parameters)} cannot be null.");
             }
 
+            MapTables(classMap);
+
             var sql = new StringBuilder();
 
             if (includedProperties?.Count > 0 && Configuration.Dialect.SupportsCountOfSubquery)
@@ -482,7 +484,7 @@ namespace DapperExtensions.Sql
 
         public virtual string GetTableName(IClassMapper map, bool useAlias = false)
         {
-            return Configuration.Dialect.GetTableName(map.SchemaName, map.TableName, useAlias ? GetAliasFromTableName(map.Identity) : null);
+            return Configuration.Dialect.GetTableName(map.SchemaName, map.TableName, useAlias ? (GetAliasFromTableName(map.Identity)??map.SimpleAlias) : null);
         }
 
         public virtual string GetTableName(IClassMapper map, IColumn column)

@@ -1,21 +1,37 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netcoreapp2.1;netcoreapp3.1;net461;net5.0;netstandard2.0;netstandard2.1;</TargetFrameworks>
-		<Version>1.7.0</Version>
-		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<TargetFrameworks>netcoreapp3.1;net472;net6.0;netstandard2.1;</TargetFrameworks>
+		<Version>1.7.2-patch3</Version>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<LangVersion>8.0</LangVersion>
+    <PrivateKey />
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 	<PropertyGroup>
 		<RuntimeIdentifiers>win;osx;linux</RuntimeIdentifiers>
 	</PropertyGroup>
 
-	<!--<PropertyGroup Condition=" '$(TargetFramework)' == 'net461'">
+  <PropertyGroup Label="Signing">
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>SD.Dapper.Public.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>True</DelaySign>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(PrivateKey)' != '' ">
+    <SignAssembly>True</SignAssembly>
+    <DelaySign>False</DelaySign>
+    <AssemblyOriginatorKeyFile>$(PrivateKey)</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  
+  
+  
+	<!--<PropertyGroup Condition=" '$(TargetFramework)' == 'net472'">
 		<DefineConstants>NETFRAMEWORK</DefineConstants>
 	</PropertyGroup>-->
 
-	<!--<PropertyGroup Condition="'$(TargetFramework)' != 'net461' AND '$(TargetFramework)' != 'netstandard2.0'">
+	<!--<PropertyGroup Condition="'$(TargetFramework)' != 'net472' AND '$(TargetFramework)' != 'netstandard2.0'">
 		<DefineConstants>NETCORE</DefineConstants>
 	</PropertyGroup>-->
 
@@ -30,30 +46,29 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Dapper.StrongName" Version="2.0.90" />
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-		<PackageReference Include="Newtonsoft.Json" version="13.0.1" />
-		<PackageReference Include="Slapper.AutoMapper" Version="2.0.1" />
-		<PackageReference Include="Dapper" Version="2.0.90" />
+		<PackageReference Include="Newtonsoft.Json" version="13.0.2" />
 		<PackageReference Include="System.Data.Common" Version="4.3.0" />
+        <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+        <PackageReference Include="SD.Slapper.AutoMapper.Strongname" Version="2.0.5-patch1" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' != 'net461' and '$(TargetFramework)' != 'net461'">
+	<ItemGroup Condition="'$(TargetFramework)' != 'net472' and '$(TargetFramework)' != 'net472'">
 		<PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.19.110" />
 		<PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'net461' and '$(OSTYPE)' != 'linux-gnu' and '$(OSTYPE)' != 'darwin18'">
-		<PackageReference Include="Oracle.ManagedDataAccess" version="19.11.0" targetFramework="net461" />
+	<ItemGroup Condition="'$(TargetFramework)' == 'net472' and '$(OSTYPE)' != 'linux-gnu' and '$(OSTYPE)' != 'darwin18'">
+		<PackageReference Include="Oracle.ManagedDataAccess" version="19.11.0" targetFramework="net472" />
 	</ItemGroup>
 
 	<PropertyGroup>
 		<PackageId>$(AssemblyName)</PackageId>
 		<files>
-			<file src="bin\Release\net461\$(AssemblyName).dll" target="lib\net461\$(AssemblyName).dll" />
-			<file src="bin\Release\netcoreapp2.1\$(AssemblyName).dll" target="lib\netcoreapp2.1\$(AssemblyName).dll" />
+			<file src="bin\Release\net472\$(AssemblyName).dll" target="lib\net472\$(AssemblyName).dll" />
 			<file src="bin\Release\netcoreapp3.1\$(AssemblyName).dll" target="lib\netcoreapp3.1\$(AssemblyName).dll" />
-			<file src="bin\Release\net5.0\$(AssemblyName).dll" target="lib\net5.0\$(AssemblyName).dll" />
-			<file src="bin\Release\netstandard2.0\$(AssemblyName).dll" target="lib\netstandard2.0\$(AssemblyName).dll" />
+			<file src="bin\Release\net6.0\$(AssemblyName).dll" target="lib\net6.0\$(AssemblyName).dll" />
 			<file src="bin\Release\netstandard2.1\$(AssemblyName).dll" target="lib\netstandard2.1\$(AssemblyName).dll" />
 		</files>
 		<Description>A small library that complements Dapper by adding basic CRUD operations (Get, Insert, Update, Delete) for your POCOs. For more advanced querying scenarios, Dapper Extensions provides a predicate system.</Description>
@@ -65,34 +80,42 @@
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/tmsmith/Dapper-Extensions.git</RepositoryUrl>
 		<PackageReleaseNotes>
-			1.7.0
-			* Removed DNXCore
-			* Migrate project to Visual Studio 2019
-			* Compatibility with .Net Framework 4.6.1, .Core 2.1, 3.1, Net 5.0 and Net Standard 2.0 and 2.1
-			* Removed DB2 support from .Net Framework due IBM removal of nuget packages
-			* Included possibility to define a subset of columns to select / update
-			* Implemented Code Coverage to the Tests
-			* Migrate tests connection strings to JSon
-			* Unified NetCore and NetFramework projects to use a simple multi-target projects
-			* Multiple enhancements to the code
-			* Implemented multi-level predicate support
-			1.6.2 / 1.6.3
-			* Exposed Ignore keys on update in usages of Implementor
-			1.6.1
-			* Added Oracle Dialect to 4.5
-			1.6.0
-			* Added DB2 Dialect
-			* Added flag to ignore All Key fields when doing an update
-			* Added missing async/await methods
-			* Added unmap method to Mapper
-		</PackageReleaseNotes>
+      * for SD repository
+      1.7.2
+      * update slapper.mapper refs
+      * fix issue with update with ignore keys
+      1.7.1
+      * fix Get-by-id merged
+      * for to SD repository
+      1.7.0
+      * Removed DNXCore
+      * Migrate project to Visual Studio 2019
+      * Compatibility with .Net Framework 4.6.1, .Core 2.1, 3.1, Net 5.0 and Net Standard 2.0 and 2.1
+      * Removed DB2 support from .Net Framework due IBM removal of nuget packages
+      * Included possibility to define a subset of columns to select / update
+      * Implemented Code Coverage to the Tests
+      * Migrate tests connection strings to JSon
+      * Unified NetCore and NetFramework projects to use a simple multi-target projects
+      * Multiple enhancements to the code
+      * Implemented multi-level predicate support
+      1.6.2 / 1.6.3
+      * Exposed Ignore keys on update in usages of Implementor
+      1.6.1
+      * Added Oracle Dialect to 4.5
+      1.6.0
+      * Added DB2 Dialect
+      * Added flag to ignore All Key fields when doing an update
+      * Added missing async/await methods
+      * Added unmap method to Mapper
+    </PackageReleaseNotes>
 		<PackageTags>orm sql micro-orm Data Dapper</PackageTags>
 		<NeutralLanguage></NeutralLanguage>
-		<SignAssembly>true</SignAssembly>
-		<AssemblyOriginatorKeyFile>DapperExtensions.snk</AssemblyOriginatorKeyFile>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 	</PropertyGroup>
 
+
+  
+  
 	<ItemGroup>
 		<Compile Include="..\DapperExtensions\DapperAsyncExtensions.cs" Link="DapperAsyncExtensions.cs" />
 		<Compile Include="..\DapperExtensions\DapperAsyncImplementor.cs" Link="DapperAsyncImplementor.cs" />

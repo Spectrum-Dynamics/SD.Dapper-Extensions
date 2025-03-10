@@ -286,10 +286,11 @@ namespace DapperExtensions
         protected static IPredicate GetPredicate(IClassMapper classMap, object predicate)
         {
             var wherePredicate = predicate as IPredicate;
+
             if (wherePredicate == null && predicate != null)
             {
                 wherePredicate = GetEntityPredicate(classMap, predicate);
-            }
+            }            
 
             return wherePredicate;
         }
@@ -367,15 +368,28 @@ namespace DapperExtensions
             var notIgnoredColumns = classMap.Properties.Where(p => !p.Ignored);
             foreach (var kvp in ReflectionHelper.GetObjectValues(entity).Where(property => notIgnoredColumns.Any(c => c.Name == property.Key)))
             {
-                var fieldPredicate = Activator.CreateInstance(predicateType) as IFieldPredicate;
-                fieldPredicate.Not = false;
-                fieldPredicate.Operator = Operator.Eq;
-                fieldPredicate.PropertyName = kvp.Key;
-                fieldPredicate.Value = kvp.Value is Func<object> ? kvp.Value() : kvp.Value;
-                predicates.Add(fieldPredicate);
+                AddPredicates(predicateType, predicates, kvp.Key, kvp.Value is Func<object> ? kvp.Value() : kvp.Value);
+            }
+
+            // predicates will be empty if entity is not KeyValuePair
+            if (entity != null && !predicates.Any())
+            {
+                //Get Primary Key when use Identity
+                var key = classMap.Properties.SingleOrDefault(p=>p.KeyType == KeyType.Identity || p.KeyType == KeyType.Assigned);
+                AddPredicates(predicateType, predicates, key.Name, entity);
             }
 
             return ReturnPredicate(predicates);
+        }
+
+        private static void AddPredicates(Type predicateType, IList<IPredicate> predicates, string key, object value)
+        {
+            var fieldPredicate = Activator.CreateInstance(predicateType) as IFieldPredicate;
+            fieldPredicate.Not = false;
+            fieldPredicate.Operator = Operator.Eq;
+            fieldPredicate.PropertyName = key;
+            fieldPredicate.Value = value;
+            predicates.Add(fieldPredicate);
         }
 
         protected GridReaderResultReader GetMultipleByBatch(IDbConnection connection, GetMultiplePredicate predicate, IDbTransaction transaction, int? commandTimeout, IList<IReferenceMap> includedProperties = null)
@@ -557,12 +571,16 @@ namespace DapperExtensions
             return GetDynamicParameters(entity, classMap, sequenceIdentityColumn, foreignKeys, ignored, useColumnAlias);
         }
 
-        public DynamicParameters GetDynamicParameters<T>(T entity, DynamicParameters dynamicParameters, IMemberMap keyColumn, bool useColumnAlias = false)
+        public DynamicParameters GetDynamicParameters<T>(IClassMapper classMap, T entity, IMemberMap keyColumn, bool useColumnAlias = false)
         {
-            dynamicParameters ??= new DynamicParameters();
-            foreach (var prop in entity.GetType().GetProperties(BindingFlags.GetProperty | BindingFlags.Instance | BindingFlags.Public)
-                .Where(p => p.Name != keyColumn.Name))
-                AddParameter(entity, dynamicParameters, new MemberMap(prop), useColumnAlias);
+            var ignored = classMap.Properties.Where(x => x.Ignored).Select(p => p.MemberInfo).ToList();
+
+            var dynamicParameters = new DynamicParameters();
+            
+            foreach (var prop in entity.GetType().GetProperties(BindingFlags.GetProperty | BindingFlags.GetField | BindingFlags.Instance | BindingFlags.Public)
+                .Where(p => p.Name != keyColumn.Name && !ignored.Contains(p)
+                ))
+                dynamicParameters = AddParameter(entity, dynamicParameters, new MemberMap(prop), useColumnAlias);
 
             return dynamicParameters;
         }
@@ -695,7 +713,7 @@ namespace DapperExtensions
                 var keyColumn = triggerIdentityColumn ?? identityColumn;
                 object keyValue;
 
-                dynamicParameters = GetDynamicParameters(entity, dynamicParameters, keyColumn, true);
+                dynamicParameters = GetDynamicParameters(classMap, entity, keyColumn, true);
 
                 if (triggerIdentityColumn != null)
                 {
@@ -705,7 +723,9 @@ namespace DapperExtensions
                 {
                     keyValue = InsertIdentity(connection, transaction, commandTimeout, classMap, sql, dynamicParameters);
                 }
-
+                //workaround for identity type differ than long\Bigint
+                if (keyColumn.MemberType != keyValue.GetType())
+                    keyValue = Convert.ChangeType(keyValue, keyColumn.MemberType);
                 keyValues.Add(keyColumn.Name, keyValue);
                 keyColumn.SetValue(entity, keyValue);
             }
@@ -770,6 +790,7 @@ namespace DapperExtensions
 
         protected T InternalGet<T>(IDbConnection connection, dynamic id, IDbTransaction transaction, int? commandTimeout, IList<IProjection> colsToSelect, IList<IReferenceMap> includedProperties = null)
         {
+            if (id is null) throw new NullReferenceException($"{nameof(id)} could not be null");
             var result = (IEnumerable<T>)InternalGetListAutoMap<T>(connection, id, null, transaction, commandTimeout, true, colsToSelect, includedProperties);
             return result.SingleOrDefault();
         }

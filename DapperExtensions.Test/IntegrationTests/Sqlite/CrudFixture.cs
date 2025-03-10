@@ -97,6 +97,15 @@ namespace DapperExtensions.Test.IntegrationTests.Sqlite
             [Test]
             public void UsingKey_ReturnsEntity()
             {
+                Person p0 = new Person
+                {
+                    Active = true,
+                    FirstName = "Foo",
+                    LastName = "Bar",
+                    DateCreated = DateTime.UtcNow
+                };
+                Db.Insert(p0);
+
                 Person p1 = new Person
                 {
                     Active = true,
