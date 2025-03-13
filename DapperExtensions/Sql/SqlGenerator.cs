@@ -164,7 +164,7 @@ namespace DapperExtensions.Sql
             }
 
             MapTables(classMap);
-
+            AllColumns = GetColumns().ToList();
             var sql = new StringBuilder();
 
             if (includedProperties?.Count > 0 && Configuration.Dialect.SupportsCountOfSubquery)
