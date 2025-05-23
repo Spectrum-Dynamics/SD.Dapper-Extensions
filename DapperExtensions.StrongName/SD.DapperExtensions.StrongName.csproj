@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>netcoreapp3.1;net472;net6.0;netstandard2.1;</TargetFrameworks>
-		<Version>1.7.2-patch4</Version>
+		<Version>1.7.2-patch5</Version>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<LangVersion>8.0</LangVersion>
     <PrivateKey />
@@ -84,6 +84,7 @@
       1.7.2
       * update slapper.mapper refs
       * fix issue with update with ignore keys
+      * patch5 - merge Add Thread-Safe SqlGenerator implementation from https://github.com/xamele0n/Dapper-Extensions
       1.7.1
       * fix Get-by-id merged
       * for to SD repository
