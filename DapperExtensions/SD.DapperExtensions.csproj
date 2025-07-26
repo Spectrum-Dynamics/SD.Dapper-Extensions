@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>netcoreapp3.1;net472;net6.0;netstandard2.1;</TargetFrameworks>
-		<Version>1.7.2-patch5</Version>
+		<Version>1.7.2-patch6</Version>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<LangVersion>8.0</LangVersion>
 	</PropertyGroup>
@@ -96,15 +96,16 @@
 		<PackageReference Include="System.Data.Common" Version="4.3.0" />
         <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
         <PackageReference Include="SD.Slapper.AutoMapper" Version="2.0.5-patch1" />
+        <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' != 'net472' and '$(TargetFramework)' != 'net472'">
-		<PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.19.110" />
+		<PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.19.180" />
 		<PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net472' and '$(OSTYPE)' != 'linux-gnu' and '$(OSTYPE)' != 'darwin18'">
-		<PackageReference Include="Oracle.ManagedDataAccess" version="19.11.0" targetFramework="net472" />
+		<PackageReference Include="Oracle.ManagedDataAccess" version="19.18.0" targetFramework="net472" />
 	</ItemGroup>
 
 	<ItemGroup>

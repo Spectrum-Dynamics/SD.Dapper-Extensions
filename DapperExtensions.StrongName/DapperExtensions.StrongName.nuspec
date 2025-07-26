@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata schemaVersion="2">
     <id>DapperExtensions.StrongName</id>
-    <version>1.7.2-patch4</version>
+    <version>1.7.2-patch5.Debug</version>
     <authors>Thad Smith, Page Brooks</authors>
     <owners>Thad Smith, Page Brooks</owners>
     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
@@ -43,12 +43,10 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-	  <file src="bin\Release\net461\DapperExtensions.StrongName.dll" target="lib\net461\DapperExtensions.StrongName.dll" />
-	  <file src="bin\Release\netcoreapp2.1\DapperExtensions.StrongName.dll" target="lib\netcoreapp2.1\DapperExtensions.StrongName.dll" />
-	  <file src="bin\Release\netcoreapp3.1\DapperExtensions.StrongName.dll" target="lib\netcoreapp3.1\DapperExtensions.StrongName.dll" />
-	  <file src="bin\Release\net5.0\DapperExtensions.StrongName.dll" target="lib\net5.0\DapperExtensions.StrongName.dll" />
-	  <file src="bin\Release\net5.0\DapperExtensions.StrongName.dll" target="lib\net5.0\DapperExtensions.StrongName.dll" />
-	  <file src="bin\Release\netstandard2.0\DapperExtensions.StrongName.dll" target="lib\netstandard2.0\DapperExtensions.StrongName.dll" />
-	  <file src="bin\Release\netstandard2.1\DapperExtensions.StrongName.dll" target="lib\netstandard2.1\DapperExtensions.StrongName.dll" />
+	  <file src="bin\Debug\472\SD.DapperExtensions.StrongName.dll" target="lib\net472\SD.DapperExtensions.StrongName.dll" />
+	  <file src="bin\Debug\472\SD.DapperExtensions.StrongName.pdb" target="lib\net472\SD.DapperExtensions.StrongName.pdb" />
+	  <file src="bin\Debug\netcoreapp3.1\SD.DapperExtensions.StrongName.dll" target="lib\netcoreapp3.1\SD.DapperExtensions.StrongName.dll" />
+	  <file src="bin\Debug\net6.0\SD.DapperExtensions.StrongName.dll" target="lib\net5.0\SD.DapperExtensions.StrongName.dll" />
+	  <file src="bin\Debug\netstandard2.1\SD.DapperExtensions.StrongName.dll" target="lib\netstandard2.1\SD.DapperExtensions.StrongName.dll" />
   </files>
 </package>
