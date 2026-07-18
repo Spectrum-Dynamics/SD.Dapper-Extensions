@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netcoreapp3.1;net472;net6.0;netstandard2.1;</TargetFrameworks>
-		<Version>1.7.2-patch6</Version>
+		<TargetFrameworks>net472;net8.0;netstandard2.1;</TargetFrameworks>
+		<Version>1.7.3-dev1</Version>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<LangVersion>8.0</LangVersion>
     <PrivateKey />
@@ -46,22 +46,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Dapper.StrongName" Version="2.0.90" />
+		<PackageReference Include="Dapper.StrongName" Version="2.1.79" />
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
 		<PackageReference Include="Newtonsoft.Json" version="13.0.2" />
 		<PackageReference Include="System.Data.Common" Version="4.3.0" />
         <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
-        <PackageReference Include="SD.Slapper.AutoMapper.Strongname" Version="2.0.5-patch1" />
+        <PackageReference Include="SD.Slapper.AutoMapper.Strongname" Version="2.1.5" />
         <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' != 'net472' and '$(TargetFramework)' != 'net472'">
-		<PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.19.180" />
 		<PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net472' and '$(OSTYPE)' != 'linux-gnu' and '$(OSTYPE)' != 'darwin18'">
-		<PackageReference Include="Oracle.ManagedDataAccess" version="19.18.0" targetFramework="net472" />
 	</ItemGroup>
 
 	<PropertyGroup>
@@ -69,19 +64,18 @@
 		<files>
 			<file src="bin\Release\net472\$(AssemblyName).dll" target="lib\net472\$(AssemblyName).dll" />
 			<file src="bin\Release\net472\$(AssemblyName).pdb" target="lib\net472\$(AssemblyName).pdb" />
-			<file src="bin\Release\netcoreapp3.1\$(AssemblyName).dll" target="lib\netcoreapp3.1\$(AssemblyName).dll" />
-			<file src="bin\Release\net6.0\$(AssemblyName).dll" target="lib\net6.0\$(AssemblyName).dll" />
-			<file src="bin\Release\net6.0\$(AssemblyName).pdb" target="lib\net6.0\$(AssemblyName).pdb" />
+			<file src="bin\Release\net8.0\$(AssemblyName).dll" target="lib\net6.0\$(AssemblyName).dll" />
+			<file src="bin\Release\net8.0\$(AssemblyName).pdb" target="lib\net6.0\$(AssemblyName).pdb" />
 			<file src="bin\Release\netstandard2.1\$(AssemblyName).dll" target="lib\netstandard2.1\$(AssemblyName).dll" />
 		</files>
-		<Description>A small library that complements Dapper by adding basic CRUD operations (Get, Insert, Update, Delete) for your POCOs. For more advanced querying scenarios, Dapper Extensions provides a predicate system.</Description>
-		<Authors>Thad Smith, Page Brooks, Valfrid Couto</Authors>
-		<Company>Thad Smith, Page Brooks</Company>
-		<PackageProjectUrl>https://github.com/tmsmith/Dapper-Extensions</PackageProjectUrl>
-		<Copyright>Thad Smith, Page Brooks</Copyright>
+		<Description>A small library that complements Dapper by adding basic CRUD operations (Get, Insert, Update, Delete) for your POCOs. For more advanced querying scenarios, Dapper Extensions provides a predicate system. Fork maintained by Spectrum Dynamics.</Description>
+		<Authors>Spectrum Dynamics</Authors>
+		<Company>Spectrum Dynamics Medical</Company>
+		<PackageProjectUrl>https://github.com/Spectrum-Dynamics/SD.Dapper-Extensions</PackageProjectUrl>
+		<Copyright>Copyright 2011 Thad Smith, Page Brooks. Modifications Copyright Spectrum Dynamics.</Copyright>
 		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
 		<RepositoryType>git</RepositoryType>
-		<RepositoryUrl>https://github.com/tmsmith/Dapper-Extensions.git</RepositoryUrl>
+		<RepositoryUrl>https://github.com/Spectrum-Dynamics/SD.Dapper-Extensions.git</RepositoryUrl>
 		<PackageReleaseNotes>
       * for SD repository
       1.7.2

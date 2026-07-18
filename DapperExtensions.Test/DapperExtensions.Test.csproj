@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netcoreapp3.1;net472;net6.0</TargetFrameworks>
+		<TargetFrameworks>net472;net8.0</TargetFrameworks>
 		<IsPackable>false</IsPackable>
 	</PropertyGroup>
 	
@@ -33,25 +33,19 @@
 		<PackageReference Include="Microsoft.TestPlatform.TestHost" Version="16.10.0" />
 		<PackageReference Include="Newtonsoft.Json" version="13.0.2" />
 		<PackageReference Include="Moq" version="4.16.1" />
-		<PackageReference Include="MySql.Data" version="8.0.24" />
+		<PackageReference Include="MySql.Data" version="8.4.0" />
 		<PackageReference Include="NUnit" Version="3.13.2" />
 		<PackageReference Include="NUnit.ConsoleRunner" Version="3.12.0" />
 		<PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
 		<PackageReference Include="ReportGenerator" Version="4.8.8" />
-		<PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
-		<PackageReference Include="Dapper" Version="2.0.90" />
+		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
+		<PackageReference Include="Dapper" Version="2.1.79" />
 		<PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' != 'net472'">
-		<PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.19.180" />
 		<PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
 		<PackageReference Include="System.Data.SQLite.Core" version="1.0.113.7" />
-		<PackageReference Include="IBM.Data.DB2.Core" Version="2.2.0.100" />
-
-		<!--<PackageReference Include="IBM.Data.DB2.Core-lnx" Version="2.2.0.100" Condition="'$(OSTYPE)' == 'linux-gnu'" />
-		<PackageReference Include="IBM.Data.DB2.Core-osx" Version="2.2.0.100" Condition="'$(OSTYPE)' == 'darwin18'"/>
-		-->
 	</ItemGroup>
 
 	<!--<ItemGroup Condition="'$(TargetFramework)' != 'net472' and $(IsWindows) == true ">
@@ -91,7 +85,6 @@
 	<!--</Choose>-->
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net472'">
-		<PackageReference Include="Oracle.ManagedDataAccess" version="19.18.0" targetFramework="net472" />
 		<PackageReference Include="System.Data.SQLite" version="1.0.113.7" targetFramework="net472" />
 		<PackageReference Include="Microsoft.SqlServer.Compact" version="4.0.8876.1" />
 	</ItemGroup>

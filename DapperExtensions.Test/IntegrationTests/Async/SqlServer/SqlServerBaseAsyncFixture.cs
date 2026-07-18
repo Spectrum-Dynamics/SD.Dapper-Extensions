@@ -1,6 +1,6 @@
 ﻿using DapperExtensions.Sql;
 using NUnit.Framework;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Diagnostics.CodeAnalysis;
 
 namespace DapperExtensions.Test.IntegrationTests.Async.SqlServer
